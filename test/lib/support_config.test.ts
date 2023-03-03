@@ -183,7 +183,8 @@ Submitted by: ${slack_user.name}`;
                     test_data: 'Test data',
                     region: 'Region/Country',
                     device: 'Device',
-                    urgency: 'Test O'
+                    urgency: 'Test O',
+                    domain: 'New Domain'
                 };
 
                 it('returns a string', () => {
@@ -226,6 +227,39 @@ Submitted by: ${slack_user.name}`;
                     'ss_device_block',
                     'ss_urgency_block'
                 ]));
+            });
+
+            describe('when select_box_domain_feature view is used', () => {
+                it('returns json modal definition with the domain input field', () => {
+                    const result = config.view('bug_domain_feature');
+    
+                    expect(
+                        new Set(Object.keys(result))
+                    ).toEqual(new Set(['title', 'type', 'blocks', 'submit', 'private_metadata']));
+    
+                    const blocks_ids = result.blocks.map((block) => { return block.block_id; });
+    
+                    expect(
+                        new Set(blocks_ids)
+                    ).toEqual(new Set([
+                        'sl_title_block',
+                        'ml_description_block',
+                        'sl_currently_block',
+                        'sl_expected_block',
+                        'ss_urgency_block',
+                        'ms_component_block',
+                        'ss_region_block',
+                        'sl_version_block',
+                        'sl_employer_block',
+                        'sl_worker_block',
+                        'sl_listing_block',
+                        'sl_shift_block',
+                        'sl_test_data_block',
+                        'ss_device_block',
+                        'ss_domain_block',
+                        'ss_urgency_block'
+                    ]));
+                });
             });
         });
 

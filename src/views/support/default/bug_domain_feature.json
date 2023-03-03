@@ -1,0 +1,398 @@
+{
+  "private_metadata": "support_bug",
+  "title": {
+    "type": "plain_text",
+    "text": "New Bug Report"
+  },
+  "submit": {
+    "type": "plain_text",
+    "text": "Submit"
+  },
+  "blocks": [
+    {
+      "type": "input",
+      "block_id": "sl_title_block",
+      "element": {
+        "type": "plain_text_input",
+        "action_id": "sl_title",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "One line summary, e.g. Employer id 1234 can't post a shift"
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Summary"
+      },
+      "hint": {
+        "type": "plain_text",
+        "text": "Using words such as Employer, Worker, ACP, App helps to identify the problem."
+      }
+    },
+
+    {
+      "type": "input",
+      "block_id": "ml_description_block",
+      "element": {
+        "type": "plain_text_input",
+        "action_id": "ml_description",
+        "multiline": true,
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Bullet point steps to reproduce the issue. \nPlease include specifics, e.g. ACP or portal url, employer, shift or worker id."
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Steps to reproduce"
+      },
+      "hint": {
+        "type": "plain_text",
+        "text": "You can attach screenshots in slack thread later."
+      }
+    },
+
+    {
+      "type": "input",
+      "block_id": "sl_currently_block",
+      "element": {
+        "type": "plain_text_input",
+        "action_id": "sl_currently",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "What *currently* happens when the above steps are taken?"
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Current Outcome"
+      }
+    },
+
+    {
+      "type": "input",
+      "block_id": "sl_expected_block",
+      "element": {
+        "type": "plain_text_input",
+        "action_id": "sl_expected",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "What *should* happen when the above steps are taken?"
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Expected Outcome"
+      }
+    },
+
+    {
+      "type": "input",
+      "block_id": "ss_urgency_block",
+      "element": {
+        "action_id": "ss_urgency",
+        "type": "static_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Please select"
+        },
+        "options": [
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Yes"
+            },
+            "value": "yes"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "No"
+            },
+            "value": "no"
+          }
+        ],
+        "initial_option": {
+          "text": {
+            "type": "plain_text",
+            "text": "No"
+          },
+          "value": "no"
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Urgent"
+      }
+    },
+
+    {
+      "type": "input",
+      "block_id": "ms_component_block",
+      "element": {
+        "action_id": "ms_component",
+        "type": "multi_static_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Select one or more components"
+        },
+        "options": [
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "BE"
+            },
+            "value": "backend"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "FE"
+            },
+            "value": "frontend"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "iOS"
+            },
+            "value": "ios"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Android"
+            },
+            "value": "android"
+          }
+        ]
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Component/Platform"
+      }
+    },
+
+    {
+      "type": "input",
+      "block_id": "ss_region_block",
+      "element": {
+        "action_id": "ss_region",
+        "type": "static_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Please select"
+        },
+        "options": [
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "UK"
+            },
+            "value": "uk"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "US"
+            },
+            "value": "us"
+          }
+        ]
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Region/Country"
+      }
+    },
+
+    {
+      "type": "input",
+      "block_id": "sl_version_block",
+      "element": {
+        "type": "plain_text_input",
+        "action_id": "sl_version",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "E.g. iOS version 2.2.18, iOS max"
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "App version"
+      },
+      "optional": true
+    },
+
+    {
+      "type": "input",
+      "block_id": "sl_employer_block",
+      "element": {
+        "type": "plain_text_input",
+        "action_id": "sl_employer",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "1234"
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Employer ID"
+      },
+      "optional": true
+    },
+
+    {
+      "type": "input",
+      "block_id": "sl_worker_block",
+      "element": {
+        "type": "plain_text_input",
+        "action_id": "sl_worker",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "1234"
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Worker ID"
+      },
+      "optional": true
+    },
+
+    {
+      "type": "input",
+      "block_id": "sl_listing_block",
+      "element": {
+        "type": "plain_text_input",
+        "action_id": "sl_listing",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "1234"
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Listing ID"
+      },
+      "optional": true
+    },
+
+    {
+      "type": "input",
+      "block_id": "sl_shift_block",
+      "element": {
+        "type": "plain_text_input",
+        "action_id": "sl_shift",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "1234"
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Shift ID"
+      },
+      "optional": true
+    },
+
+    {
+      "type": "input",
+      "block_id": "sl_test_data_block",
+      "element": {
+        "type": "plain_text_input",
+        "action_id": "sl_test_data",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Employer ID, Worker ID, Shift ID, Listing ID or names."
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Test data"
+      },
+      "optional": true
+    },
+
+    {
+      "type": "input",
+      "block_id": "ss_device_block",
+      "element": {
+        "action_id": "ss_device",
+        "type": "static_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Please select"
+        },
+        "options": [
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "iOS"
+            },
+            "value": "ios"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Android"
+            },
+            "value": "android"
+          }
+        ]
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Device"
+      },
+      "optional": true
+    },
+    {
+      "type": "input",
+      "block_id": "ss_domain_block",
+      "element": {
+        "action_id": "ss_domain",
+        "type": "static_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Please select a domain."
+        },
+        "options": [
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Agency"
+            },
+            "value": "agency"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Hiring"
+            },
+            "value": "hiring"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Fulfilment"
+            },
+            "value": "fulfilment"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Client Reporting"
+            },
+            "value": "client_reporting"
+          }
+        ]
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Domain"
+      }
+    }
+  ],
+  "type": "modal"
+}

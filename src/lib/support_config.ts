@@ -200,6 +200,7 @@ Submitted by: ${user.name}`;
                 `*Listing ID*: ${submission.listing}\n` +
                 `*Shift ID*: ${submission.shift}\n` +
                 `*Test data*: ${submission.test_data}\n` +
+                `*Domain*: ${submission.domain}\n` +
                 `*Device*: ${submission.device}`;
         } else {
             return `<@${user.id}> has submitted a data request:\n\n` +
