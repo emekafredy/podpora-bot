@@ -14,7 +14,7 @@ import {
 } from './jira/api_interfaces';
 import Config from './config';
 import views from './views';
-// import feature from '../util/feature';
+import feature from '../util/feature';
 
 function commandsHelpText(commands: Array<SlackCommand>): string {
     return '👋 Need help with support bot?\n\n' + commands.map(
@@ -120,7 +120,12 @@ configs.syft = {
         return commandsHelpText(this.commands);
     },
     view: function(key: string): View {
-        return views.support.syft[key];
+        let template_name = key;
+        if (feature.is_enabled('bug_report_with_product_area_select_box') && key === 'bug') {
+            template_name = 'bug_domain_feature'
+        }
+
+        return views.support.syft[template_name];
     },
     viewToSubmission: viewToSubmission,
     issueParams: function(
@@ -186,11 +191,17 @@ Submitted by: ${user.name}`;
         request_type: RequestType
     ): string {
         if (request_type === 'bug') {
+            let product_area_submission = ''
+            if (feature.is_enabled('bug_report_with_product_area_select_box')) {
+                product_area_submission = `*Domain*: ${submission.product_area}\n`;
+            }
+
             return `<@${user.id}> has submitted a bug report:\n\n` +
                 `*${submission.title}*\n\n` +
                 `*Steps to Reproduce*:\n${submission.description}\n\n` +
                 `*Currently*:\n${submission.currently}\n\n` +
                 `*Expected*:\n${submission.expected}\n\n` +
+                product_area_submission +
                 `*Urgent*: ${submission.urgency}\n` +
                 `*Component/Platform*: ${submission.component}\n` +
                 `*Region/Country*: ${submission.region}\n` +
@@ -200,7 +211,6 @@ Submitted by: ${user.name}`;
                 `*Listing ID*: ${submission.listing}\n` +
                 `*Shift ID*: ${submission.shift}\n` +
                 `*Test data*: ${submission.test_data}\n` +
-                `*Domain*: ${submission.domain}\n` +
                 `*Device*: ${submission.device}`;
         } else {
             return `<@${user.id}> has submitted a data request:\n\n` +

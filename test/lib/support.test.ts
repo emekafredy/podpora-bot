@@ -15,7 +15,7 @@ import { support } from '../../src/lib/support';
 import {
     ChannelThreadFileShareEvent,
 } from '../../src/lib/slack/api_interfaces';
-import feature from '../../src/util/feature';
+// import feature from '../../src/util/feature';
 
 const logErrorSpy = jest.spyOn(logger, 'error').mockReturnValue({} as Logger);
 
@@ -103,28 +103,6 @@ describe('#showForm()', () => {
                 .then(() => {
                     expect(api_call_body).toContain('sl_title');
                     expect(api_call_body).toContain('ml_description');
-                });
-        });
-    });
-
-    describe('select_box_domain_feature fields', () => {
-        it('sends modal form with domain as part of the input fields', () => {
-            let api_call_body = '';
-            const featureSpy = jest.spyOn(feature, 'is_enabled');
-            featureSpy.mockImplementationOnce((_) => true);
-
-            expect.assertions(2);
-            nock('https://slack.com')
-                .post('/api/views.open', body => {
-                    api_call_body = JSON.stringify(body);
-                    return body;
-                })
-                .reply(200, { ok: true });
-
-            return support.showForm(slack, 'bug', 'abc')
-                .then(() => {
-                    expect(api_call_body).toContain('ss_domain');
-                    expect(api_call_body).toContain('ss_domain_block');
                 });
         });
     });

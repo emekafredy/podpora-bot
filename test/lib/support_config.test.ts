@@ -1,5 +1,5 @@
 import supportConfig from '../../src/lib/support_config';
-// import feature from '../../src/util/feature';
+import feature from '../../src/util/feature';
 
 describe('supportConfig', () => {
     const slack_user = { id: 'foo-user-id', name: 'Joe Doe' };
@@ -183,8 +183,7 @@ Submitted by: ${slack_user.name}`;
                     test_data: 'Test data',
                     region: 'Region/Country',
                     device: 'Device',
-                    urgency: 'Test O',
-                    domain: 'New Domain'
+                    urgency: 'Test O'
                 };
 
                 it('returns a string', () => {
@@ -194,6 +193,38 @@ Submitted by: ${slack_user.name}`;
                         .forEach((value: string) => {
                             expect(result).toContain(value);
                         });
+                });
+
+                describe('when bug_report_with_product_area_select_box feature is enabled', () => {
+                    const submission = {
+                        title: 'Test title',
+                        description: 'Test description',
+                        currently: 'Test currently',
+                        expected: 'Test expected',
+                        product_area: 'Other',
+                        component: 'Component/Platform',
+                        version: 'App version',
+                        employer: 'Employer ID',
+                        worker: 'Worker ID',
+                        listing: 'Listing ID',
+                        shift: 'Shift ID',
+                        test_data: 'Test data',
+                        region: 'Region/Country',
+                        device: 'Device',
+                        urgency: 'Test O'
+                    };
+    
+                    it('returns a string', () => {
+                        const featureSpy = jest.spyOn(feature, 'is_enabled');
+                        featureSpy.mockImplementationOnce((_) => true);
+
+                        const result = config.messageText(submission, slack_user, request_type);
+    
+                        Object.values(submission)
+                            .forEach((value: string) => {
+                                expect(result).toContain(value);
+                            });
+                    });
                 });
             });
         });
@@ -229,9 +260,11 @@ Submitted by: ${slack_user.name}`;
                 ]));
             });
 
-            describe('when select_box_domain_feature view is used', () => {
+            describe('when bug_report_with_product_area_select_box feature view is used', () => {
                 it('returns json modal definition with the domain input field', () => {
-                    const result = config.view('bug_domain_feature');
+                    const featureSpy = jest.spyOn(feature, 'is_enabled');
+                    featureSpy.mockImplementationOnce((_) => true);
+                    const result = config.view('bug');
     
                     expect(
                         new Set(Object.keys(result))
@@ -256,7 +289,7 @@ Submitted by: ${slack_user.name}`;
                         'sl_shift_block',
                         'sl_test_data_block',
                         'ss_device_block',
-                        'ss_domain_block',
+                        'ss_product_area_block',
                         'ss_urgency_block'
                     ]));
                 });

@@ -27,7 +27,7 @@ import {
     fileShareEventToIssueComment
 } from './slack_jira_helpers';
 
-import feature from '../util/feature';
+// import feature from '../util/feature';
 // feature.is_enabled('feature_name')
 
 const support = {
@@ -43,13 +43,8 @@ const support = {
         };
 
         const config = supportConfig(support.configName(slack));
-        let template_name
-        if (feature.is_enabled('select_box_domain_feature') && request_type === 'bug') {
-            template_name =  `${request_type}_domain_feature`
-        } else {
-            template_name =  request_type
-        }
-        const view: View = config.view(template_name);
+        const view: View = config.view(request_type);
+        
 
         return slack.showModalView(view, trigger_id)
             .catch(errorHandler);
