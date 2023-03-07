@@ -216,7 +216,7 @@ Submitted by: ${slack_user.name}`;
     
                     it('returns a string', () => {
                         const featureSpy = jest.spyOn(feature, 'is_enabled');
-                        featureSpy.mockImplementationOnce((_) => true);
+                        featureSpy.mockImplementationOnce(() => true);
 
                         const result = config.messageText(submission, slack_user, request_type);
     
@@ -263,7 +263,7 @@ Submitted by: ${slack_user.name}`;
             describe('when bug_report_with_product_area_select_box feature view is used', () => {
                 it('returns json modal definition with the domain input field', () => {
                     const featureSpy = jest.spyOn(feature, 'is_enabled');
-                    featureSpy.mockImplementationOnce((_) => true);
+                    featureSpy.mockImplementationOnce(() => true);
                     const result = config.view('bug');
     
                     expect(

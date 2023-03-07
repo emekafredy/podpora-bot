@@ -175,7 +175,7 @@ describe('Slack', () => {
                         })
                     );
                     done();
-                }).catch((err) => {
+                }).catch(() => {
                     done();
                 });
         });
@@ -192,7 +192,7 @@ describe('Slack', () => {
                     });
 
                 slack.fileInfo(file_id)
-                    .then((_res) => {
+                    .then(() => {
                         done();
                     }).catch((err) => {
                         expect(err.message).toContain('invalid_auth');

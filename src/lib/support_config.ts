@@ -122,7 +122,7 @@ configs.syft = {
     view: function(key: string): View {
         let template_name = key;
         if (feature.is_enabled('bug_report_with_product_area_select_box') && key === 'bug') {
-            template_name = 'bug_domain_feature'
+            template_name = 'bug_report_with_product_area';
         }
 
         return views.support.syft[template_name];
@@ -191,7 +191,7 @@ Submitted by: ${user.name}`;
         request_type: RequestType
     ): string {
         if (request_type === 'bug') {
-            let product_area_submission = ''
+            let product_area_submission = '';
             if (feature.is_enabled('bug_report_with_product_area_select_box')) {
                 product_area_submission = `*Domain*: ${submission.product_area}\n`;
             }

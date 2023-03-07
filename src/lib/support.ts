@@ -44,7 +44,6 @@ const support = {
 
         const config = supportConfig(support.configName(slack));
         const view: View = config.view(request_type);
-        
 
         return slack.showModalView(view, trigger_id)
             .catch(errorHandler);
