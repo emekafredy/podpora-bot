@@ -44,6 +44,7 @@ ${submission.currently}
 Expected:
 ${submission.expected}
 
+
 Urgent: ${submission.urgency}
 Component/Platform: ${submission.component}
 Region/Country: ${submission.region}
@@ -58,6 +59,65 @@ Device: ${submission.device}
 Submitted by: ${slack_user.name}`;
 
                 it('matches expected object', () => {
+                    expect(
+                        config.issueParams(submission, slack_user, request_type)
+                    ).toEqual({
+                        fields: {
+                            project: { key: 'SUP' },
+                            summary: submission.title,
+                            issuetype: { name: 'Bug' },
+                            description: desc,
+                            labels: ['support']
+                        }
+                    });
+                });
+            });
+
+            describe('bug with bug_report_with_product_area_select_box feature enabled', () => {
+                const request_type = 'bug';
+                const submission = {
+                    title: 'Test A',
+                    description: 'Test B',
+                    currently: 'Test C',
+                    expected: 'Test D',
+                    component: 'Test E',
+                    region: 'Test L',
+                    version: 'Test F',
+                    employer: 'Test G',
+                    worker: 'Test H',
+                    listing: 'Test I',
+                    shift: 'Test J',
+                    test_data: 'Test K',
+                    device: 'Test M',
+                    urgency: 'Test N',
+                    product_area: 'Test area'
+                };
+                const desc = `${submission.description}
+
+Currently:
+${submission.currently}
+
+Expected:
+${submission.expected}
+
+Product Area: ${submission.product_area}
+Urgent: ${submission.urgency}
+Component/Platform: ${submission.component}
+Region/Country: ${submission.region}
+App version: ${submission.version}
+Employer ID: ${submission.employer}
+Worker ID: ${submission.worker}
+Listing ID: ${submission.listing}
+Shift ID: ${submission.shift}
+Test data: ${submission.test_data}
+Device: ${submission.device}
+
+Submitted by: ${slack_user.name}`;
+
+                it('matches expected object with product area included', () => {
+                    const featureSpy = jest.spyOn(feature, 'is_enabled');
+                    featureSpy.mockImplementationOnce(() => true);
+
                     expect(
                         config.issueParams(submission, slack_user, request_type)
                     ).toEqual({

@@ -147,6 +147,10 @@ configs.syft = {
         const result: CreateIssue = { fields: fields };
 
         if (request_type === 'bug') {
+            let product_area_submission = '';
+            if (feature.is_enabled('bug_report_with_product_area_select_box')) {
+                product_area_submission = `Product Area: ${submission.product_area}`;
+            }
             fields.issuetype.name = 'Bug';
             fields.description = `${desc}
 
@@ -156,6 +160,7 @@ ${submission.currently}
 Expected:
 ${submission.expected}
 
+${product_area_submission}
 Urgent: ${submission.urgency}
 Component/Platform: ${submission.component}
 Region/Country: ${submission.region}
@@ -193,7 +198,7 @@ Submitted by: ${user.name}`;
         if (request_type === 'bug') {
             let product_area_submission = '';
             if (feature.is_enabled('bug_report_with_product_area_select_box')) {
-                product_area_submission = `*Domain*: ${submission.product_area}\n`;
+                product_area_submission = `*Product Area*: ${submission.product_area}\n`;
             }
 
             return `<@${user.id}> has submitted a bug report:\n\n` +
