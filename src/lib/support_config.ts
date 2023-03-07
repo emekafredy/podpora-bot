@@ -120,12 +120,7 @@ configs.syft = {
         return commandsHelpText(this.commands);
     },
     view: function(key: string): View {
-        let template_name = key;
-        if (feature.is_enabled('bug_report_with_product_area_select_box') && key === 'bug') {
-            template_name = 'bug_report_with_product_area';
-        }
-
-        return views.support.syft[template_name];
+        return views.support.syft[key];
     },
     viewToSubmission: viewToSubmission,
     issueParams: function(
@@ -147,14 +142,11 @@ configs.syft = {
         const result: CreateIssue = { fields: fields };
 
         if (request_type === 'bug') {
-            let product_area_submission = '';
-            if (feature.is_enabled('bug_report_with_product_area_select_box')) {
-                product_area_submission = `Product Area: ${submission.product_area}`;
-                if (feature.is_enabled('bug_report_with_flex_domain_custom_field')) {
-                    // Setting customfield_10773 (Flex Domain)
-                    fields.customfield_10773 = { value: submission.product_area };
-                }
+            if (feature.is_enabled('bug_report_with_flex_domain_custom_field')) {
+                // Setting customfield_10773 (Flex Domain)
+                fields.customfield_10773 = { value: submission.product_area };
             }
+
             fields.issuetype.name = 'Bug';
             fields.description = `${desc}
 
@@ -164,7 +156,7 @@ ${submission.currently}
 Expected:
 ${submission.expected}
 
-${product_area_submission}
+Product Area: ${submission.product_area}
 Urgent: ${submission.urgency}
 Component/Platform: ${submission.component}
 Region/Country: ${submission.region}
@@ -200,17 +192,12 @@ Submitted by: ${user.name}`;
         request_type: RequestType
     ): string {
         if (request_type === 'bug') {
-            let product_area_submission = '';
-            if (feature.is_enabled('bug_report_with_product_area_select_box')) {
-                product_area_submission = `*Product Area*: ${submission.product_area}\n`;
-            }
-
             return `<@${user.id}> has submitted a bug report:\n\n` +
                 `*${submission.title}*\n\n` +
                 `*Steps to Reproduce*:\n${submission.description}\n\n` +
                 `*Currently*:\n${submission.currently}\n\n` +
                 `*Expected*:\n${submission.expected}\n\n` +
-                product_area_submission +
+                `*Product Area*:\n${submission.product_area}\n` +
                 `*Urgent*: ${submission.urgency}\n` +
                 `*Component/Platform*: ${submission.component}\n` +
                 `*Region/Country*: ${submission.region}\n` +

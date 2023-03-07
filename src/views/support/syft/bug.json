@@ -88,6 +88,74 @@
 
     {
       "type": "input",
+      "block_id": "ss_product_area_block",
+      "element": {
+        "action_id": "ss_product_area",
+        "type": "static_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Please select the affected product area"
+        },
+        "options": [
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Agency"
+            },
+            "value": "agency"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Client"
+            },
+            "value": "client"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Hiring"
+            },
+            "value": "hiring"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Fulfilment"
+            },
+            "value": "fulfilment"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Time & Attendance"
+            },
+            "value": "time_and_attendance"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Pay"
+            },
+            "value": "pay"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Other"
+            },
+            "value": "other"
+          }
+        ]
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Product Area"
+      }
+    },
+
+    {
+      "type": "input",
       "block_id": "ss_urgency_block",
       "element": {
         "action_id": "ss_urgency",

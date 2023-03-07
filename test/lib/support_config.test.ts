@@ -34,61 +34,6 @@ describe('supportConfig', () => {
                     shift: 'Test J',
                     test_data: 'Test K',
                     device: 'Test M',
-                    urgency: 'Test N'
-                };
-                const desc = `${submission.description}
-
-Currently:
-${submission.currently}
-
-Expected:
-${submission.expected}
-
-
-Urgent: ${submission.urgency}
-Component/Platform: ${submission.component}
-Region/Country: ${submission.region}
-App version: ${submission.version}
-Employer ID: ${submission.employer}
-Worker ID: ${submission.worker}
-Listing ID: ${submission.listing}
-Shift ID: ${submission.shift}
-Test data: ${submission.test_data}
-Device: ${submission.device}
-
-Submitted by: ${slack_user.name}`;
-
-                it('matches expected object', () => {
-                    expect(
-                        config.issueParams(submission, slack_user, request_type)
-                    ).toEqual({
-                        fields: {
-                            project: { key: 'SUP' },
-                            summary: submission.title,
-                            issuetype: { name: 'Bug' },
-                            description: desc,
-                            labels: ['support']
-                        }
-                    });
-                });
-            });
-
-            describe('bug with bug_report_with_product_area_select_box feature enabled', () => {
-                const request_type = 'bug';
-                const submission = {
-                    title: 'Test A',
-                    description: 'Test B',
-                    currently: 'Test C',
-                    expected: 'Test D',
-                    component: 'Test E',
-                    region: 'Test L',
-                    version: 'Test F',
-                    employer: 'Test G',
-                    worker: 'Test H',
-                    listing: 'Test I',
-                    shift: 'Test J',
-                    test_data: 'Test K',
-                    device: 'Test M',
                     urgency: 'Test N',
                     product_area: 'Test area'
                 };
@@ -114,10 +59,7 @@ Device: ${submission.device}
 
 Submitted by: ${slack_user.name}`;
 
-                it('matches expected object with product area included', () => {
-                    const featureSpy = jest.spyOn(feature, 'is_enabled');
-                    featureSpy.mockImplementationOnce(() => true);
-
+                it('matches expected object', () => {
                     expect(
                         config.issueParams(submission, slack_user, request_type)
                     ).toEqual({
@@ -176,7 +118,6 @@ Submitted by: ${slack_user.name}`;
                 it('matches expected object with product area included', () => {
                     const featureSpy = jest.spyOn(feature, 'is_enabled');
                     featureSpy.mockImplementationOnce(() => true)
-                              .mockImplementationOnce(() => true);
 
                     expect(
                         config.issueParams(submission, slack_user, request_type)
@@ -295,6 +236,7 @@ Submitted by: ${slack_user.name}`;
                     description: 'Test description',
                     currently: 'Test currently',
                     expected: 'Test expected',
+                    product_area: 'Other',
                     component: 'Component/Platform',
                     version: 'App version',
                     employer: 'Employer ID',
@@ -314,38 +256,6 @@ Submitted by: ${slack_user.name}`;
                         .forEach((value: string) => {
                             expect(result).toContain(value);
                         });
-                });
-
-                describe('when bug_report_with_product_area_select_box feature is enabled', () => {
-                    const submission = {
-                        title: 'Test title',
-                        description: 'Test description',
-                        currently: 'Test currently',
-                        expected: 'Test expected',
-                        product_area: 'Other',
-                        component: 'Component/Platform',
-                        version: 'App version',
-                        employer: 'Employer ID',
-                        worker: 'Worker ID',
-                        listing: 'Listing ID',
-                        shift: 'Shift ID',
-                        test_data: 'Test data',
-                        region: 'Region/Country',
-                        device: 'Device',
-                        urgency: 'Test O'
-                    };
-    
-                    it('returns a string', () => {
-                        const featureSpy = jest.spyOn(feature, 'is_enabled');
-                        featureSpy.mockImplementationOnce(() => true);
-
-                        const result = config.messageText(submission, slack_user, request_type);
-    
-                        Object.values(submission)
-                            .forEach((value: string) => {
-                                expect(result).toContain(value);
-                            });
-                    });
                 });
             });
         });
@@ -376,43 +286,9 @@ Submitted by: ${slack_user.name}`;
                     'sl_listing_block',
                     'sl_shift_block',
                     'sl_test_data_block',
-                    'ss_device_block'
+                    'ss_device_block',
+                    'ss_product_area_block'
                 ]));
-            });
-
-            describe('when bug_report_with_product_area_select_box feature view is used', () => {
-                it('returns json modal definition with the domain input field', () => {
-                    const featureSpy = jest.spyOn(feature, 'is_enabled');
-                    featureSpy.mockImplementationOnce(() => true);
-                    const result = config.view('bug');
-    
-                    expect(
-                        new Set(Object.keys(result))
-                    ).toEqual(new Set(['title', 'type', 'blocks', 'submit', 'private_metadata']));
-    
-                    const blocks_ids = result.blocks.map((block) => { return block.block_id; });
-    
-                    expect(
-                        new Set(blocks_ids)
-                    ).toEqual(new Set([
-                        'sl_title_block',
-                        'ml_description_block',
-                        'sl_currently_block',
-                        'sl_expected_block',
-                        'ss_urgency_block',
-                        'ms_component_block',
-                        'ss_region_block',
-                        'sl_version_block',
-                        'sl_employer_block',
-                        'sl_worker_block',
-                        'sl_listing_block',
-                        'sl_shift_block',
-                        'sl_test_data_block',
-                        'ss_device_block',
-                        'ss_product_area_block',
-                        'ss_urgency_block'
-                    ]));
-                });
             });
         });
 
