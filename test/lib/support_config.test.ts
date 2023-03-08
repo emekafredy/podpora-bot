@@ -25,7 +25,7 @@ describe('supportConfig', () => {
                     description: 'Test B',
                     currently: 'Test C',
                     expected: 'Test D',
-                    component: 'Test E',
+                    platform: 'Test E',
                     region: 'Test L',
                     version: 'Test F',
                     employer: 'Test G',
@@ -33,7 +33,6 @@ describe('supportConfig', () => {
                     listing: 'Test I',
                     shift: 'Test J',
                     test_data: 'Test K',
-                    device: 'Test M',
                     urgency: 'Test N'
                 };
                 const desc = `${submission.description}
@@ -46,7 +45,7 @@ ${submission.expected}
 
 
 Urgent: ${submission.urgency}
-Component/Platform: ${submission.component}
+Platform/Device: ${submission.platform}
 Region/Country: ${submission.region}
 App version: ${submission.version}
 Employer ID: ${submission.employer}
@@ -54,7 +53,6 @@ Worker ID: ${submission.worker}
 Listing ID: ${submission.listing}
 Shift ID: ${submission.shift}
 Test data: ${submission.test_data}
-Device: ${submission.device}
 
 Submitted by: ${slack_user.name}`;
 
@@ -80,7 +78,7 @@ Submitted by: ${slack_user.name}`;
                     description: 'Test B',
                     currently: 'Test C',
                     expected: 'Test D',
-                    component: 'Test E',
+                    platform: 'Test E',
                     region: 'Test L',
                     version: 'Test F',
                     employer: 'Test G',
@@ -88,7 +86,6 @@ Submitted by: ${slack_user.name}`;
                     listing: 'Test I',
                     shift: 'Test J',
                     test_data: 'Test K',
-                    device: 'Test M',
                     urgency: 'Test N',
                     product_area: 'Test area'
                 };
@@ -102,7 +99,7 @@ ${submission.expected}
 
 Product Area: ${submission.product_area}
 Urgent: ${submission.urgency}
-Component/Platform: ${submission.component}
+Platform/Device: ${submission.platform}
 Region/Country: ${submission.region}
 App version: ${submission.version}
 Employer ID: ${submission.employer}
@@ -110,7 +107,6 @@ Worker ID: ${submission.worker}
 Listing ID: ${submission.listing}
 Shift ID: ${submission.shift}
 Test data: ${submission.test_data}
-Device: ${submission.device}
 
 Submitted by: ${slack_user.name}`;
 
@@ -234,7 +230,7 @@ Submitted by: ${slack_user.name}`;
                     description: 'Test description',
                     currently: 'Test currently',
                     expected: 'Test expected',
-                    component: 'Component/Platform',
+                    platform: 'Platform/Device',
                     version: 'App version',
                     employer: 'Employer ID',
                     worker: 'Worker ID',
@@ -242,7 +238,6 @@ Submitted by: ${slack_user.name}`;
                     shift: 'Shift ID',
                     test_data: 'Test data',
                     region: 'Region/Country',
-                    device: 'Device',
                     urgency: 'Test O'
                 };
 
@@ -262,7 +257,7 @@ Submitted by: ${slack_user.name}`;
                         currently: 'Test currently',
                         expected: 'Test expected',
                         product_area: 'Other',
-                        component: 'Component/Platform',
+                        platform: 'Platform/Device',
                         version: 'App version',
                         employer: 'Employer ID',
                         worker: 'Worker ID',
@@ -270,7 +265,6 @@ Submitted by: ${slack_user.name}`;
                         shift: 'Shift ID',
                         test_data: 'Test data',
                         region: 'Region/Country',
-                        device: 'Device',
                         urgency: 'Test O'
                     };
     
@@ -307,15 +301,14 @@ Submitted by: ${slack_user.name}`;
                     'sl_currently_block',
                     'sl_expected_block',
                     'ss_urgency_block',
-                    'ms_component_block',
+                    'ms_platform_block',
                     'ss_region_block',
                     'sl_version_block',
                     'sl_employer_block',
                     'sl_worker_block',
                     'sl_listing_block',
                     'sl_shift_block',
-                    'sl_test_data_block',
-                    'ss_device_block'
+                    'sl_test_data_block'
                 ]));
             });
 
@@ -339,7 +332,7 @@ Submitted by: ${slack_user.name}`;
                         'sl_currently_block',
                         'sl_expected_block',
                         'ss_urgency_block',
-                        'ms_component_block',
+                        'ms_platform_block',
                         'ss_region_block',
                         'sl_version_block',
                         'sl_employer_block',
@@ -347,7 +340,6 @@ Submitted by: ${slack_user.name}`;
                         'sl_listing_block',
                         'sl_shift_block',
                         'sl_test_data_block',
-                        'ss_device_block',
                         'ss_product_area_block',
                         'ss_urgency_block'
                     ]));

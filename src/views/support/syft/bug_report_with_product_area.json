@@ -203,28 +203,56 @@
 
     {
       "type": "input",
-      "block_id": "ms_component_block",
+      "block_id": "ms_platform_block",
       "element": {
-        "action_id": "ms_component",
+        "action_id": "ms_platform",
         "type": "multi_static_select",
         "placeholder": {
           "type": "plain_text",
-          "text": "Select one or more components"
+          "text": "Select platforms/devices"
         },
         "options": [
           {
             "text": {
               "type": "plain_text",
-              "text": "BE"
+              "text": "ACP"
             },
-            "value": "backend"
+            "value": "acp"
           },
           {
             "text": {
               "type": "plain_text",
-              "text": "FE"
+              "text": "Agency Portal"
             },
-            "value": "frontend"
+            "value": "agency_portal"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Android"
+            },
+            "value": "android"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Client App"
+            },
+            "value": "client_app"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Client Portal"
+            },
+            "value": "client_portal"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Inspector"
+            },
+            "value": "inspector"
           },
           {
             "text": {
@@ -236,15 +264,15 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Android"
+              "text": "Worker App"
             },
-            "value": "android"
+            "value": "worker_app"
           }
         ]
       },
       "label": {
         "type": "plain_text",
-        "text": "Component/Platform"
+        "text": "Platform/Device"
       }
     },
 
@@ -385,40 +413,6 @@
       "label": {
         "type": "plain_text",
         "text": "Test data"
-      },
-      "optional": true
-    },
-
-    {
-      "type": "input",
-      "block_id": "ss_device_block",
-      "element": {
-        "action_id": "ss_device",
-        "type": "static_select",
-        "placeholder": {
-          "type": "plain_text",
-          "text": "Please select"
-        },
-        "options": [
-          {
-            "text": {
-              "type": "plain_text",
-              "text": "iOS"
-            },
-            "value": "ios"
-          },
-          {
-            "text": {
-              "type": "plain_text",
-              "text": "Android"
-            },
-            "value": "android"
-          }
-        ]
-      },
-      "label": {
-        "type": "plain_text",
-        "text": "Device"
       },
       "optional": true
     }

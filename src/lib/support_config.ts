@@ -162,7 +162,7 @@ ${submission.expected}
 
 ${product_area_submission}
 Urgent: ${submission.urgency}
-Component/Platform: ${submission.component}
+Platform/Device: ${submission.platform}
 Region/Country: ${submission.region}
 App version: ${submission.version}
 Employer ID: ${submission.employer}
@@ -170,7 +170,6 @@ Worker ID: ${submission.worker}
 Listing ID: ${submission.listing}
 Shift ID: ${submission.shift}
 Test data: ${submission.test_data}
-Device: ${submission.device}
 
 Submitted by: ${user.name}`;
 
@@ -208,15 +207,14 @@ Submitted by: ${user.name}`;
                 `*Expected*:\n${submission.expected}\n\n` +
                 product_area_submission +
                 `*Urgent*: ${submission.urgency}\n` +
-                `*Component/Platform*: ${submission.component}\n` +
+                `*Platform/Device*: ${submission.platform}\n` +
                 `*Region/Country*: ${submission.region}\n` +
                 `*App version*: ${submission.version}\n` +
                 `*Employer ID*: ${submission.employer}\n` +
                 `*Worker ID*: ${submission.worker}\n` +
                 `*Listing ID*: ${submission.listing}\n` +
                 `*Shift ID*: ${submission.shift}\n` +
-                `*Test data*: ${submission.test_data}\n` +
-                `*Device*: ${submission.device}`;
+                `*Test data*: ${submission.test_data}`;
         } else {
             return `<@${user.id}> has submitted a data request:\n\n` +
                 `*${submission.title}*\n\n${submission.description}\n\n` +
