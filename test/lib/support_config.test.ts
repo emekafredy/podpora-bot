@@ -33,7 +33,8 @@ describe('supportConfig', () => {
                     listing: 'Test I',
                     shift: 'Test J',
                     test_data: 'Test K',
-                    urgency: 'Test N'
+                    urgency: 'Test N',
+                    product_area: 'Test area'
                 };
                 const desc = `${submission.description}
 
@@ -43,7 +44,7 @@ ${submission.currently}
 Expected:
 ${submission.expected}
 
-
+Product Area: ${submission.product_area}
 Urgent: ${submission.urgency}
 Platform/Device: ${submission.platform}
 Region/Country: ${submission.region}
@@ -167,7 +168,7 @@ Submitted by: ${slack_user.name}`;
 
                 it('matches expected object with product area included', () => {
                     const featureSpy = jest.spyOn(feature, 'is_enabled');
-                    featureSpy.mockImplementationOnce(() => true)
+                    featureSpy.mockImplementationOnce(() => true);
 
                     expect(
                         config.issueParams(submission, slack_user, request_type)
@@ -364,7 +365,8 @@ Submitted by: ${slack_user.name}`;
                     'sl_worker_block',
                     'sl_listing_block',
                     'sl_shift_block',
-                    'sl_test_data_block'
+                    'sl_test_data_block',
+                    'ss_product_area_block'
                 ]));
             });
 
