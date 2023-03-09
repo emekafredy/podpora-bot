@@ -110,10 +110,7 @@ Test data: ${submission.test_data}
 
 Submitted by: ${slack_user.name}`;
 
-                it('matches expected object with product area included', () => {
-                    const featureSpy = jest.spyOn(feature, 'is_enabled');
-                    featureSpy.mockImplementationOnce(() => true);
-
+                it('matches expected object', () => {
                     expect(
                         config.issueParams(submission, slack_user, request_type)
                     ).toEqual({
@@ -171,7 +168,6 @@ Submitted by: ${slack_user.name}`;
                 it('matches expected object with product area included', () => {
                     const featureSpy = jest.spyOn(feature, 'is_enabled');
                     featureSpy.mockImplementationOnce(() => true)
-                              .mockImplementationOnce(() => true);
 
                     expect(
                         config.issueParams(submission, slack_user, request_type)
