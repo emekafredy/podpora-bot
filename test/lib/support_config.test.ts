@@ -192,7 +192,7 @@ Submitted by: ${slack_user.name}`;
                     description: 'Test B',
                     currently: 'Test C',
                     expected: 'Test D',
-                    platform: 'Test E,Test Q',
+                    platform: ['Test E', 'Test Q'],
                     region: 'Test L',
                     version: 'Test F',
                     employer: 'Test G',
