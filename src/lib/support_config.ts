@@ -150,16 +150,14 @@ configs.syft = {
         const result: CreateIssue = { fields: fields };
 
         if (request_type === bugTypeName) {
+            const platforms = (submission.platform as string[]);
             if (feature.is_enabled('bug_report_with_flex_domain_custom_field')) {
                 // Setting customfield_10773 (Flex Domain)
                 fields.customfield_10773 = { value: submission.product_area };
             }
 
-            if (feature.is_enabled('bug_report_with_components_field')) {
-                const platforms = (submission.platform as string[]);
-                fields.components = platforms.map((platform) => ({ name: platform }));
-            }
 
+            fields.components = platforms.map((platform) => ({ name: platform }));
             fields.issuetype.name = 'Bug';
             fields.description = `${desc}
 
