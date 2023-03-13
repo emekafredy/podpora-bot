@@ -156,8 +156,8 @@ configs.syft = {
             }
 
             if (feature.is_enabled('bug_report_with_components_field')) {
-                const platforms = (submission.platform as string);
-                fields.components = platforms.split(',').map((platform) => ({ name: platform }));
+                const platforms = (submission.platform as string[]);
+                fields.components = platforms.map((platform) => ({ name: platform }));
             }
 
             fields.issuetype.name = 'Bug';
