@@ -1,0 +1,216 @@
+{
+  "private_metadata": "support_data",
+  "title": {
+    "type": "plain_text",
+    "text": "New Data Request"
+  },
+  "submit": {
+    "type": "plain_text",
+    "text": "Submit"
+  },
+  "blocks": [
+    {
+      "type": "input",
+      "block_id": "sl_title_block",
+      "optional": false,
+      "element": {
+        "type": "plain_text_input",
+        "action_id": "sl_title",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "e.g. Report on number of shifts per employer in Feb 2019"
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Summary"
+      }
+    },
+    {
+      "type": "input",
+      "block_id": "ml_description_block",
+      "optional": false,
+      "element": {
+        "type": "plain_text_input",
+        "action_id": "ml_description",
+        "multiline": true,
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Please include any extra information required, \ne.g. column names."
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Description"
+      },
+      "hint": {
+        "type": "plain_text",
+        "text": "Providing ID of employer, venue, worker or role may make the task easier."
+      }
+    },
+    {
+      "type": "input",
+      "block_id": "ml_reason_block",
+      "optional": false,
+      "element": {
+        "type": "plain_text_input",
+        "action_id": "ml_reason",
+        "multiline": true,
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Please enter the reason why this data or update is required along with its urgency."
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Reason for request"
+      }
+    },
+    {
+      "type": "input",
+      "block_id": "ss_region_block",
+      "element": {
+        "action_id": "ss_region",
+        "type": "static_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Please select"
+        },
+        "options": [
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "UK"
+            },
+            "value": "uk"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "US"
+            },
+            "value": "us"
+          }
+        ]
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Region/Country"
+      }
+    },
+    {
+      "type": "input",
+      "block_id": "ss_product_area_block",
+      "element": {
+        "action_id": "ss_product_area",
+        "type": "static_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Please select the affected product area"
+        },
+        "options": [
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Agency"
+            },
+            "value": "agency"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Client"
+            },
+            "value": "client"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Hiring"
+            },
+            "value": "hiring"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Fulfilment"
+            },
+            "value": "fulfilment"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Time & Attendance"
+            },
+            "value": "time_and_attendance"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Pay"
+            },
+            "value": "pay"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Platform & Enabling"
+            },
+            "value": "platform_and_enabling"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Other"
+            },
+            "value": "other"
+          }
+        ]
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Product Area"
+      }
+    },
+    {
+      "type": "input",
+      "block_id": "ss_urgency_block",
+      "element": {
+        "action_id": "ss_urgency",
+        "type": "static_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Please select"
+        },
+        "options": [
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "1 - 2 days"
+            },
+            "value": "onetotwo"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "3 - 5 days"
+            },
+            "value": "threetofive"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Any specific date"
+            },
+            "value": "any"
+          }
+        ]
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Urgency"
+      }
+    }
+  ],
+  "type": "modal"
+}

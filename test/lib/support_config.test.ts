@@ -263,6 +263,7 @@ Submitted by: ${slack_user.name}`;
 Reason:
 ${submission.reason}
 
+
 Urgency: ${submission.urgency}
 Region/Country: ${submission.region}
 
@@ -284,6 +285,88 @@ Submitted by: ${slack_user.name}`;
                 });
             });
 
+            describe('data req with data_request_with_product_area_select_box flag enabled', () => {
+                const request_type = 'data';
+                const submission = {
+                    title: 'Test A',
+                    description: 'Test B',
+                    reason: 'Test C',
+                    urgency: 'Test D',
+                    region: 'Test L',
+                    product_area: 'Test product area'
+                };
+                const desc = `${submission.description}
+
+Reason:
+${submission.reason}
+
+Product Area: ${submission.product_area}
+Urgency: ${submission.urgency}
+Region/Country: ${submission.region}
+
+Submitted by: ${slack_user.name}`;
+
+                it('matches expected object', () => {
+                    const featureSpy = jest.spyOn(feature, 'is_enabled');
+                    featureSpy.mockImplementationOnce(() => true);
+
+                    expect(
+                        config.issueParams(submission, slack_user, request_type)
+                    ).toEqual({
+                        fields: {
+                            project: { key: 'SUP' },
+                            summary: submission.title,
+                            issuetype: { name: 'Data Request' },
+                            description: desc,
+                            components: [{ name: 'Backend' }],
+                            labels: ['support']
+                        }
+                    });
+                });
+            });
+
+            describe('data req with data_request_with_product_area_select_box flag enabled', () => {
+                const request_type = 'data';
+                const submission = {
+                    title: 'Test A',
+                    description: 'Test B',
+                    reason: 'Test C',
+                    urgency: 'Test D',
+                    region: 'Test L',
+                    product_area: 'Test product area'
+                };
+                const desc = `${submission.description}
+
+Reason:
+${submission.reason}
+
+Product Area: ${submission.product_area}
+Urgency: ${submission.urgency}
+Region/Country: ${submission.region}
+
+Submitted by: ${slack_user.name}`;
+
+                it('matches expected object', () => {
+                    const featureSpy = jest.spyOn(feature, 'is_enabled');
+                    featureSpy.mockImplementationOnce(() => true)
+                              .mockImplementationOnce(() => true);
+
+                    expect(
+                        config.issueParams(submission, slack_user, request_type)
+                    ).toEqual({
+                        fields: {
+                            project: { key: 'SUP' },
+                            summary: submission.title,
+                            issuetype: { name: 'Data Request' },
+                            description: desc,
+                            components: [{ name: 'Backend' }],
+                            labels: ['support'],
+                            customfield_10773: { value: submission.product_area } // Flex Domain
+                        }
+                    });
+                });
+            });
+
             describe('when long title', () => {
                 const request_type = 'data';
                 const long_title = 'few random words repeated many times'.repeat(10);
@@ -300,7 +383,7 @@ Submitted by: ${slack_user.name}`;
 
 ${submission.description}
 
-Reason:
+Reason:\n
 
 
 Urgency: ${submission.urgency}
@@ -341,6 +424,29 @@ Submitted by: ${slack_user.name}`;
                     expect(result).toContain('Test description');
                     expect(result).toContain('Test reason');
                     expect(result).toContain('Test urgency');
+                });
+
+                describe('data with data_request_with_product_area_select_box flag enabled', () => {
+                    const submission = {
+                        title: 'Test title',
+                        description: 'Test description',
+                        reason: 'Test reason',
+                        product_area: 'Test product area',
+                        urgency: 'Test urgency'
+                    };
+
+                    it('returns a string', () => {
+                        const featureSpy = jest.spyOn(feature, 'is_enabled');
+                        featureSpy.mockImplementationOnce(() => true);
+
+                        const result = config.messageText(submission, slack_user, request_type);
+
+                        expect(result).toContain('*Test title*');
+                        expect(result).toContain('Test description');
+                        expect(result).toContain('Test reason');
+                        expect(result).toContain('Test product area');
+                        expect(result).toContain('Test urgency');
+                    });
                 });
             });
 
@@ -462,6 +568,31 @@ Submitted by: ${slack_user.name}`;
                         'sl_listing_block',
                         'sl_shift_block',
                         'sl_test_data_block',
+                        'ss_product_area_block',
+                        'ss_urgency_block'
+                    ]));
+                });
+            });
+
+            describe('when data_request_with_product_area_select_box feature view is used', () => {
+                it('returns json modal definition with the domain input field', () => {
+                    const featureSpy = jest.spyOn(feature, 'is_enabled');
+                    featureSpy.mockImplementationOnce(() => true);
+                    const result = config.view('data');
+
+                    expect(
+                        new Set(Object.keys(result))
+                    ).toEqual(new Set(['title', 'type', 'blocks', 'submit', 'private_metadata']));
+
+                    const blocks_ids = result.blocks.map((block) => { return block.block_id; });
+
+                    expect(
+                        new Set(blocks_ids)
+                    ).toEqual(new Set([
+                        'sl_title_block',
+                        'ml_description_block',
+                        'ml_reason_block',
+                        'ss_region_block',
                         'ss_product_area_block',
                         'ss_urgency_block'
                     ]));
