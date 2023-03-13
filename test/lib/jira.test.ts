@@ -32,13 +32,14 @@ describe('Jira', () => {
                 summary: 'Sample Summary',
                 issuetype: { name: 'Bug' },
                 description: 'Sample Description',
-                labels: ['some-label']
+                labels: ['some-label'],
+                components: [{ name: 'Backend' }, { name: 'ACP' }]
             }
         };
 
         it('returns a Promise that resolves to issue object', (done) => {
             let api_call_body: string;
-            expect.assertions(5);
+            expect.assertions(7);
             nock(mock_config.host)
                 .post('/rest/api/2/issue', (body) => {
                     api_call_body = JSON.stringify(body);
@@ -52,6 +53,8 @@ describe('Jira', () => {
                     expect(api_call_body).toContain('Sample Description');
                     expect(api_call_body).toContain('some-label');
                     expect(api_call_body).toContain('Bug');
+                    expect(api_call_body).toContain('Backend');
+                    expect(api_call_body).toContain('ACP');
                     done();
                 }).catch(done);
         });
